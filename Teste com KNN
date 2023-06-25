@@ -1,0 +1,26 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
+# Carregar a base de dados
+dados = pd.read_excel('Dados.xlsx')
+
+# Separar os recursos (features) e o rótulo (label)
+X = dados[['Cliente[Latitude]', 'Cliente[Longitude]']]
+y = dados['Setor']
+
+# Dividir os dados em treinamento e teste
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15, random_state=42)
+
+# Criar e treinar o modelo
+k = 5  # número de vizinhos a serem considerados
+modelo = KNeighborsClassifier(n_neighbors=k)
+modelo.fit(X_train, y_train)
+
+# Fazer previsões com o modelo treinado
+previsoes = modelo.predict(X_test)
+
+# Avaliar a acurácia do modelo
+acuracia = accuracy_score(y_test, previsoes)
+print('Acurácia:', acuracia)
