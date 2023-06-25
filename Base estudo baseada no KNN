@@ -1,0 +1,11 @@
+dados_teste = pd.read_excel('Dados.xlsx')
+
+# Separar os recursos (features) da base de teste
+X_teste = dados_teste[['Cliente[Latitude]', 'Cliente[Longitude]']]
+
+# Fazer previsões com o modelo treinado na base de teste
+previsoes_teste = modelo.predict(X_teste)
+
+# Exibir as previsões
+print(previsoes_teste)
+
